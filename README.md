@@ -35,7 +35,9 @@ langchain 目前推荐使用 `init_model` 来简化大模型 API 的获取, 但�
 
 ## chat/completions
 
-TODO
+openai 参数的最新情况直接参考 [https://platform.openai.com/docs/api-reference/chat](https://platform.openai.com/docs/api-reference/chat)
+
+注意: 这里只是梳理接口定义, 并非所有的模型都支持下面的参数
 
 <table style="width: 100%;">
   <tr>
@@ -47,10 +49,33 @@ TODO
   </tr>
   <tr>
     <td align="center">messages</td>
-    <td align="center"></td>
-    <td align="center">✅</td>
-    <td align="center">✅</td>
-    <td align="center">✅</td>
+    <td align="center">model</td>
+    <td align="center">audio</td>
+    <td align="center">frequency_penalty</td>
+    <td align="center">logit_bias</td>
+    <td align="center">logprobs</td>
+    <td align="center">max_completion_tokens</td>
+    <td align="center">metadata</td>
+    <td align="center">modalities</td>
+    <td align="center">n</td>
+    <td align="center">parallel_tool_calls</td>
+    <td align="center">prediction</td>
+    <td align="center">presence_penalty</td>
+    <td align="center">reasoning_effort</td>
+    <td align="center">response_format</td>
+    <td align="center">seed</td>
+    <td align="center">service_tier</td>
+    <td align="center">stop</td>
+    <td align="center">store</td>
+    <td align="center">stream</td>
+    <td align="center">stream_options</td>
+    <td align="center">temperature</td>
+    <td align="center">tool_choice</td>
+    <td align="center">tools</td>
+    <td align="center">top_logprobs</td>
+    <td align="center">top_p</td>
+    <td align="center">user</td>
+    <td align="center">web_search_options</td>
   </tr>
   <tr>
     <td align="center">Agent</td>
@@ -88,3 +113,8 @@ TODO
     <td align="center">❌</td>
   </tr>
 </table>
+
+
+# OpenRouter
+
+所有支持的模型可以在 [https://openrouter.ai/models](https://openrouter.ai/models) 找到, 并且可以筛选哪些模型支持特定的参数 (例如工具调用, context-length 等)
