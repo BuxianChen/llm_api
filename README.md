@@ -77,6 +77,39 @@ deepseek API: [https://api-docs.deepseek.com/zh-cn/api/create-chat-completion](h
   </tr>
 </table>
 
+### openai-python-sdk
+
+```python
+import os
+import openai
+from dotenv import load_dotenv
+
+load_dotenv()
+
+providers = ["GEMINI", "DEEPSEEK", "OPENROUTER", "WILDCARD"]
+provider = "OPENROUTER"
+model = os.environ[f"{provider}_MODEL"]
+base_url = os.environ[f"{provider}_BASE_URL"]
+api_key = os.environ[f"{provider}_API_KEY"]
+
+print(f"provider: {provider}\nmodel: {model}\nbase_url: {base_url}")
+
+client = openai.OpenAI(
+    base_url=base_url,
+    api_key=api_key,
+)
+
+response = client.chat.completions.create(
+    model=model,
+    messages=[
+        {"role": "user", "content": "hello"}
+    ]
+)
+print(response)
+```
+
+### langchain
+
 
 # OpenRouter
 
