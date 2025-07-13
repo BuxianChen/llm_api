@@ -35,82 +35,45 @@ langchain 目前推荐使用 `init_model` 来简化大模型 API 的获取, 但�
 
 ## chat/completions
 
-openai 参数的最新情况直接参考 [https://platform.openai.com/docs/api-reference/chat](https://platform.openai.com/docs/api-reference/chat)
+openai API [https://platform.openai.com/docs/api-reference/chat](https://platform.openai.com/docs/api-reference/chat)
+
+openrouter API: [https://openrouter.ai/docs/api-reference/chat-completion](https://openrouter.ai/docs/api-reference/chat-completion)
+
+claude openai-compatility: [https://docs.anthropic.com/en/api/openai-sdk](https://docs.anthropic.com/en/api/openai-sdk)
+
+gemini openai-compatility: [https://ai.google.dev/gemini-api/docs/openai](https://ai.google.dev/gemini-api/docs/openai)
+
+deepseek API: [https://api-docs.deepseek.com/zh-cn/api/create-chat-completion](https://api-docs.deepseek.com/zh-cn/api/create-chat-completion)
 
 注意: 这里只是梳理接口定义, 并非所有的模型都支持下面的参数
 
 <table style="width: 100%;">
   <tr>
     <th align="center">请求参数</th>
-    <th align="center">解释</th>
-    <th align="center">Openai</th>
+    <th align="center">openai参数说明</th>
+    <th align="center">openai</th>
+    <th align="center">OpenRouter参数说明</th>
     <th align="center">OpenRouter</th>
-    <th align="center">Wildcard</th>
+    <th align="center">gemini参数说明</th>
+    <th align="center">gemini</th>
   </tr>
   <tr>
     <td align="center">messages</td>
-    <td align="center">model</td>
+    <td align="center">对话历史</td>
+    <td align="center">✅</td>
+    <td align="center">支持部分类型</td>
+    <td align="center">❌</td>
+    <td align="center">支持</td>
+    <td align="center">✅</td>
+  </tr>
+  <tr>
     <td align="center">audio</td>
-    <td align="center">frequency_penalty</td>
-    <td align="center">logit_bias</td>
-    <td align="center">logprobs</td>
-    <td align="center">max_completion_tokens</td>
-    <td align="center">metadata</td>
-    <td align="center">modalities</td>
-    <td align="center">n</td>
-    <td align="center">parallel_tool_calls</td>
-    <td align="center">prediction</td>
-    <td align="center">presence_penalty</td>
-    <td align="center">reasoning_effort</td>
-    <td align="center">response_format</td>
-    <td align="center">seed</td>
-    <td align="center">service_tier</td>
-    <td align="center">stop</td>
-    <td align="center">store</td>
-    <td align="center">stream</td>
-    <td align="center">stream_options</td>
-    <td align="center">temperature</td>
-    <td align="center">tool_choice</td>
-    <td align="center">tools</td>
-    <td align="center">top_logprobs</td>
-    <td align="center">top_p</td>
-    <td align="center">user</td>
-    <td align="center">web_search_options</td>
-  </tr>
-  <tr>
-    <td align="center">Agent</td>
-    <td align="center"></td>
+    <td align="center">是否返回语音</td>
     <td align="center">✅</td>
+    <td align="center">不支持</td>
     <td align="center">❌</td>
-    <td align="center">✅</td>
-  </tr>
-  <tr>
-    <td align="center">Workflow</td>
-    <td align="center">✅</td>
-    <td align="center">❌</td>
-    <td align="center">✅</td>
-    <td align="center">❌</td>
-  </tr>
-  <tr>
-    <td align="center">Observability</td>
-    <td align="center">✅</td>
-    <td align="center">✅</td>
-    <td align="center">❌</td>
-    <td align="center">❌</td>
-  </tr>
-  <tr>
-    <td align="center">Enterprise Feature (SSO/Access control)</td>
-    <td align="center">✅</td>
-    <td align="center">❌</td>
-    <td align="center">❌</td>
-    <td align="center">❌</td>
-  </tr>
-  <tr>
-    <td align="center">Local Deployment</td>
-    <td align="center">✅</td>
-    <td align="center">✅</td>
-    <td align="center">✅</td>
-    <td align="center">❌</td>
+    <td align="center">TODO</td>
+    <td align="center">❓</td>
   </tr>
 </table>
 
