@@ -114,3 +114,67 @@ print(response)
 # OpenRouter
 
 所有支持的模型可以在 [https://openrouter.ai/models](https://openrouter.ai/models) 找到, 并且可以筛选哪些模型支持特定的参数 (例如工具调用, context-length 等)
+
+# google-genai sdk
+
+```python
+from google.genai import Client
+from google.genai.types import Content, Part, GenerateContentConfig
+from google.genai.types import Tool, ToolCodeExecution, FunctionDeclaration, Schema, GoogleSearch
+
+
+def get_temperature(city):
+    weather_map = {
+        "newyork": 23.2,
+        "beijing": 30.0,
+        "shanghai": 12.9,
+        "guangzhou": 13.0
+    }
+    c = city.replace(" ", "").lower()
+    if c in weather_map:
+        return weather_map[c]
+    else:
+        return None
+
+
+client = Client(vertexai=False, api_key="...")
+
+# 似乎只同时支持一类工具
+# response = client.models.generate_content(...)
+response = await client.aio.models.generate_content(
+    model='gemini-2.5-flash',
+    contents=[
+        Content(
+            parts=[Part(text="help me caculate the average temperature of these cities: New York, Beijing, Shanghai")]
+        )
+    ],
+    config=GenerateContentConfig(
+        tools=[
+            # Tool(
+            #     code_execution=ToolCodeExecution()
+            # ),
+            Tool(
+                function_declarations=[
+                    FunctionDeclaration(
+                        description="given a city name, get Celsius temperature, if the temperature not available, will return None",
+                        name="get_temperature",
+                        parameters={
+                            "type": "object",
+                            "properties": {
+                                "city": {
+                                    "type": "string",
+                                    "description": "city name",
+                                }
+                            },
+                            "required": ["city"],
+                        },
+                    )
+                ]
+            ),
+            # Tool(
+            #     google_search=GoogleSearch()
+            # ),
+        ]
+    )
+)
+```
