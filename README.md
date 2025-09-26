@@ -12,7 +12,7 @@
 
 langchain 目前推荐使用 `init_model` 来简化大模型 API 的获取, 但对于只能通过中转服务提供商 API Key 调用的情况, `init_model` 可能无法直接使用
 
-# openai-sdk
+# openai-sdk: chat/completions
 
 (更新时间: 2025/07/08) openai 提供的 endpoint 主要有如下
 
@@ -32,8 +32,6 @@ langchain 目前推荐使用 `init_model` 来简化大模型 API 的获取, 但�
 - `v1/completions`: 弃用
 
 总的来说, 最主要的接口是 `v1/chat/completions`
-
-## chat/completions
 
 openai API [https://platform.openai.com/docs/api-reference/chat](https://platform.openai.com/docs/api-reference/chat)
 
@@ -77,7 +75,7 @@ deepseek API: [https://api-docs.deepseek.com/zh-cn/api/create-chat-completion](h
   </tr>
 </table>
 
-### openai-python-sdk
+TEXT-TO-TEXT
 
 ```python
 import os
@@ -108,10 +106,54 @@ response = client.chat.completions.create(
 print(response)
 ```
 
-### langchain
+TEXT/IMAGE-TO-TEXT
 
+```python
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
+import base64
 
-# OpenRouter
+load_dotenv()
+
+image_path = "a.jpg"
+with open(image_path, "rb") as fw:
+    base64_image = base64.b64encode(fw.read()).decode("utf-8")
+
+providers = ["GEMINI", "DEEPSEEK", "OPENROUTER", "WILDCARD"]
+provider = "OPENROUTER"
+model = os.environ[f"{provider}_MODEL"]
+base_url = os.environ[f"{provider}_BASE_URL"]
+api_key = os.environ[f"{provider}_API_KEY"]
+print(f"provider: {provider}\nmodel: {model}\nbase_url: {base_url}")
+
+client = OpenAI(
+    base_url=base_url,
+    api_key=api_key,
+)
+response = client.chat.completions.create(
+    model=model,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:image/png;base64,{base64_image}"
+                    },
+                },
+                {"type": "text", "text": "what's this"},
+            ],
+        }
+    ],
+)
+print(response)
+```
+
+# langchain-sdk
+
+# openrouter-sdk
 
 所有支持的模型可以在 [https://openrouter.ai/models](https://openrouter.ai/models) 找到, 并且可以筛选哪些模型支持特定的参数 (例如工具调用, context-length 等)
 
