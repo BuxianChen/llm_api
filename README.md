@@ -26,16 +26,42 @@ langchain 目前推荐使用 `init_model` 来简化大模型 API 的获取, 但�
 - openrouter: 有
 - wildcard: 有
 
-```python
-providers = ["GEMINI", "DEEPSEEK", "ARK", "DASHSCOPE", "ZAI", "HUNYUAN", "MOONSHOT", "OPENROUTER", "WILDCARD"]
-```
-
 > [!NOTE]
 > 先记录各个 Provider 的关键信息, 然后按 SDK 的维度展开. 
 
 # Providers
 
 TODO
+
+**使用 openai-sdk 的 list model 查看可用模型**
+
+```python
+import openai
+from dotenv import load_dotenv
+import os
+load_dotenv(override=True)
+
+providers = ["GEMINI", "DEEPSEEK", "ARK", "DASHSCOPE", "ZAI", "HUNYUAN", "MOONSHOT", "OPENROUTER", "WILDCARD"]
+
+for provider in providers:
+    model = os.environ[f"{provider}_MODEL"]
+    base_url = os.environ[f"{provider}_BASE_URL"]
+    api_key = os.environ[f"{provider}_API_KEY"]
+
+    print(f"provider: {provider}\nmodel: {model}\nbase_url: {base_url}")
+
+    client = openai.OpenAI(
+        base_url=base_url,
+        api_key=api_key,
+    )
+    try:
+        for model in client.models.list().data:
+            print(model.id)
+    except:
+        print("LIST MODEL ERROR")
+    
+    print("\n")
+```
 
 # openai sdk: chat/completions
 
