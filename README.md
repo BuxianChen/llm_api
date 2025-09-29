@@ -4,7 +4,7 @@
 
 - 大模型提供商/中转提供商: openai, claude, gemini, deepseek; openrouter, wildcard
 
-- 调用方法: curl, requests, openai-sdk, provider-sdk, langchain
+- SDK/调用方法: curl, requests, openai-sdk, provider-sdk, langchain
 
 关于 provider-sdk: [openai-python-sdk](https://github.com/openai/openai-python) 的某些 API 规范 (例如 `/chat/completion`) 已经是通用标准. 但各大厂实际上也提供了自己的一套 API (不同于 openai 的接口规范), 但基本都会提供适配 `/chat/completion` 的主要参数的一个接口. 很多中转提供商所给的 API 通常也都只支持 openai 这一套的部分接口, 而不支持 provider-sdk.
 
@@ -12,7 +12,32 @@
 
 langchain 目前推荐使用 `init_model` 来简化大模型 API 的获取, 但对于只能通过中转服务提供商 API Key 调用的情况, `init_model` 可能无法直接使用
 
-# openai-sdk: chat/completions
+本人目前已有的 API KEY 情况如下:
+
+- openai: 无
+- anthropic: 无
+- google: 有
+- deepseek: 有
+- doubao: 有
+- qwen: 有
+- glm: 有
+- hunyuan: 有
+- kimi: 有
+- openrouter: 有
+- wildcard: 有
+
+```python
+providers = ["GEMINI", "DEEPSEEK", "ARK", "DASHSCOPE", "ZAI", "HUNYUAN", "MOONSHOT", "OPENROUTER", "WILDCARD"]
+```
+
+> [!NOTE]
+> 先记录各个 Provider 的关键信息, 然后按 SDK 的维度展开. 
+
+# Providers
+
+TODO
+
+# openai sdk: chat/completions
 
 (更新时间: 2025/07/08) openai 提供的 endpoint 主要有如下
 
@@ -84,7 +109,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-providers = ["GEMINI", "DEEPSEEK", "OPENROUTER", "WILDCARD"]
 provider = "OPENROUTER"
 model = os.environ[f"{provider}_MODEL"]
 base_url = os.environ[f"{provider}_BASE_URL"]
@@ -120,7 +144,6 @@ image_path = "a.jpg"
 with open(image_path, "rb") as fw:
     base64_image = base64.b64encode(fw.read()).decode("utf-8")
 
-providers = ["GEMINI", "DEEPSEEK", "OPENROUTER", "WILDCARD"]
 provider = "OPENROUTER"
 model = os.environ[f"{provider}_MODEL"]
 base_url = os.environ[f"{provider}_BASE_URL"]
@@ -151,9 +174,9 @@ response = client.chat.completions.create(
 print(response)
 ```
 
-# langchain-sdk
+# langchain sdk
 
-# openrouter-sdk
+# openrouter sdk
 
 所有支持的模型可以在 [https://openrouter.ai/models](https://openrouter.ai/models) 找到, 并且可以筛选哪些模型支持特定的参数 (例如工具调用, context-length 等)
 
@@ -220,3 +243,4 @@ response = await client.aio.models.generate_content(
     )
 )
 ```
+
