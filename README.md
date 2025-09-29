@@ -33,6 +33,14 @@ langchain 目前推荐使用 `init_model` 来简化大模型 API 的获取, 但�
 
 TODO
 
+|Provider|SDK|openai-sdk兼容性|cluade-sdk兼容性|网址|可用模型链接|可用模型举例|
+|--------|---|---------------|---------------|-----|----------|------------|
+|智谱|[zai-sdk](https://github.com/zai-org/z-ai-sdk-python)|✅|✅|[BigModel](https://docs.bigmodel.cn/)|[可用模型](https://docs.bigmodel.cn/cn/guide/start/model-overview)|glm-4.5<br>glm-4.5v|
+
+**价格对照**
+
+TODO
+
 **使用 openai-sdk 的 list model 查看可用模型**
 
 ```python
